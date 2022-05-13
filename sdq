@@ -1,0 +1,256 @@
+[33mcommit f5ad4c565b03b905c75d9b61fc58d30d69345dc0[m[33m ([m[1;36mHEAD -> [m[1;32mdevelop[m[33m, [m[1;31morigin/develop[m[33m)[m
+Author: 01086055223@hanmail.net <01086055223@hanmail.net>
+Date:   Tue Apr 26 20:14:21 2022 +0900
+
+    chore : 패키지 이동
+
+[33mcommit 8138e56fcaec10a4c02366a5a39ca1026b6cd37e[m
+Author: 01086055223@hanmail.net <01086055223@hanmail.net>
+Date:   Tue Apr 26 19:59:23 2022 +0900
+
+    refactor : 코드 정리
+
+[33mcommit 72c3ddf8417707433fdbfae624a9360873b4465f[m
+Author: 01086055223@hanmail.net <01086055223@hanmail.net>
+Date:   Tue Apr 26 19:16:34 2022 +0900
+
+    refactor : Auditing 값 수정, 에러코드 응집화
+    
+    - auditing 기능에 들어가는 수정자, 생성자 값을 정의
+    - 에러코드를 string 형태가 아닌 enum 으로 응집화
+
+[33mcommit a62f5cfe42b8904db240b0d4bb7a215b8c896410[m
+Author: 01086055223@hanmail.net <01086055223@hanmail.net>
+Date:   Tue Apr 26 17:49:12 2022 +0900
+
+    [refactor] 코드 리팩토링
+    - 멤버엔티티에 toMember 로 엔티티 생성 응집도 관리
+    - 수정자, 생성자, 수정시간, 생성시간 @MappedSuperClass 로 멤버엔티티에 상속
+
+[33mcommit ef8c51a7be878cecfc83351b4adeb578e9c0ec1e[m
+Author: 01086055223@hanmail.net <01086055223@hanmail.net>
+Date:   Sat Apr 23 00:33:14 2022 +0900
+
+    fix : 코드 리팩토링 + 어노테이션 추가
+    
+    - 서비스 계층에 @Transactional 어노테이션을 읽기 전용으로 설정하여 복사본
+    만드는 것을 방지.
+    
+    - 로그인 실패 핸들러에서 If 문을 함수로 리팩토링 하는 과정을 거쳤음.
+
+[33mcommit c6c66772f10990748aa8ad4b86b9e1a1d619a100[m
+Author: 01086055223@hanmail.net <01086055223@hanmail.net>
+Date:   Sat Apr 23 00:21:49 2022 +0900
+
+    fix : 코드 리팩토링 + 주석추가
+
+[33mcommit 14d7865067c48684f0cd9df69bfb4ceeec9bbfed[m
+Author: 01086055223@hanmail.net <01086055223@hanmail.net>
+Date:   Fri Apr 22 20:03:46 2022 +0900
+
+    chore : 코드 정리
+
+[33mcommit 66d7084185f53382bc41792a9b24ef5a126e4ffd[m
+Author: 01086055223@hanmail.net <01086055223@hanmail.net>
+Date:   Fri Apr 22 02:46:44 2022 +0900
+
+    feature : 세션 고정 보호 정책
+    
+    세션 탈취 방지
+
+[33mcommit 25ffd369d5e629bdd5ea44505a8504e248eafd6f[m
+Author: 01086055223@hanmail.net <01086055223@hanmail.net>
+Date:   Fri Apr 22 02:42:05 2022 +0900
+
+    feature : 로그인시 아이디 비밀번호가 일치하지 않을시 로직 구현
+
+[33mcommit 17fe27118cf0ebf2376e61243e2279d226dbfc3d[m[33m ([m[1;32mfeature/logout[m[33m)[m
+Author: 01086055223@hanmail.net <01086055223@hanmail.net>
+Date:   Fri Apr 22 01:51:21 2022 +0900
+
+    feature : 로그아웃 기능 구현 추가
+    
+    로그아웃 핸들러 대신에 컨트롤러가 로그아웃의 GET 요청을 받아 스프링 시큐리티 내부에서 구현해 놓은
+    핸들러를 직접 호출하여 처리함.
+    
+    추가 사항으로는 로그아웃 성공 핸들러를 만들어서 직접 등록함.
+     - FormLogoutSuccessHandler
+
+[33mcommit dc1f0e3c656d5520818b7cf0f266a1562a166c53[m[33m ([m[1;32mfeature/login[m[33m)[m
+Author: 01086055223@hanmail.net <01086055223@hanmail.net>
+Date:   Fri Apr 22 01:29:43 2022 +0900
+
+    fix : 회원가입 쿼리 최적화
+    
+    회원가입시 기존에 같은 이메일로 가입되어있는 회원이 있는 경우를 대비해
+    멤버엔티티를 가져오는 과정을 거쳤다.
+    
+    변경내용
+     - 프로젝션이 전체 컬럼에서 하나의 컬럼인 email 로 프로젝션을 하였음.
+     - 쿼리성능 향상에 도움을 줌.
+
+[33mcommit 479eddfbed93cbd3b4ee5b6dde0179caad5e7d2c[m
+Author: 01086055223@hanmail.net <01086055223@hanmail.net>
+Date:   Fri Apr 22 01:09:06 2022 +0900
+
+    feature : 로그인 기능 구현 미션
+    
+    Member 엔티티에 권한 목록을 가져오는 getRoles() 를 구현하였음.
+    SecurityConfig 클래스를 만들어서 시큐리티 로그인 관련 설정을 해줌.
+     - AccessDeniedHandler
+     - AuthenticationSuccessHandler
+     - AuthenticationFailureHandelr
+    
+    위의 핸들러 적용을 위한 Provider 생성.
+    실질적으로 Provider 에서 멤버객체를  찾는 loadByUsername 을 구현
+     - username 이 아닌 email 로 구성하였음.
+    
+    Thymeleaf Security Name Space 로 선언한 후 isAuthenticated, isAnonymous
+    문법으로 로그인, 로그아웃이 상단 바에 생기는 문제를 구현함.
+    
+    이 브랜치에서 다음에 수행해야할 항목
+     - 쿼리 최적화
+
+[33mcommit e10595f28d943994c908e2a941e75cfacd6ca46c[m[33m ([m[1;31morigin/feature/register[m[33m, [m[1;32mfeature/register[m[33m)[m
+Author: 01086055223@hanmail.net <01086055223@hanmail.net>
+Date:   Thu Apr 21 05:29:47 2022 +0900
+
+    feat : 회원가입과 회원가입 폼 데이터 검증 로직 추가
+    
+    Thymeleaf error 처리 문법으로 오류 검출 적용
+    @Valid, @NotBlank 등 어노테이션과 객체에러는 BindingResult 의 reject() 이용해서
+    로직을 구성하였음.
+    
+    회원가입 객체를 저장하기 위해 Repository, Service 클래스 생성.
+     - 테스트 코드 추가. (LoginTest.class)
+    
+    회원가입 객체가 저장이 될 때 수정자, 생성자, 수정일, 생성일의 주기를
+    위해 Spring-Data-Jpa 의 Auditing 기능을 사용하였음.
+     - Auditing Aware Bean 추가.
+    
+    Member Entity 구성
+    비밀번호 인코딩을 위해 Gradle 에 Spring-Security 를 넣어놓았음.
+    현재 비활성화 상태로 다음 로직 구현 때 활성화.
+     - Password Factory Bean 추가.
+
+[33mcommit 6087ecba3823bea5e487bbb9b609efd1d072d3cd[m
+Author: 01086055223@hanmail.net <01086055223@hanmail.net>
+Date:   Wed Apr 20 23:03:32 2022 +0900
+
+    style : 네비게이션바와 푸터 쇼핑몰 공통 레이아웃 생성
+    
+    공통헤더, 공통푸터, 공통네비게이션바 html을 추가합니다.
+    Thymeleaf fragment 기능을 이용해서 다음의 파일을 작성합니다.
+     - footer.html
+     - header.html
+     - layout_nav_top.html
+    
+    공통 레이아웃을 생성하고 적용시키기 위해 다음의 파일을 수정합니다.
+     - loginform.html
+     - registerform.html
+     - mainpage.html
+
+[33mcommit 2dc420779aa8fcdf56921ec6b7b79d3635cf30af[m
+Author: 01086055223@hanmail.net <01086055223@hanmail.net>
+Date:   Wed Apr 20 05:37:31 2022 +0900
+
+    chore : 운영환경 분리 테스트 코드 작성 및 설정 파일 수정
+    
+    미션1. application.yml profile 별로 생성(default, dev, prod, test)
+    
+    구성 환경은 mariaDB 연결을 테스트 환경을 제외한 모든 환경에서 적용합니다.
+    테스트 환경의 경우 h2 데이터베이스에 연결하였습니다.
+     - application.yml
+     - application-dev.yml
+     - application-test.yml
+     - application-prod.yml
+    
+    구성 환경의 분리로 테스트 환경에서 DB 에 데이터가 정상적으로 들어가는지
+    테스트코드를 작성하였습니다.
+     - DatabaseConnectionTest.java
+       - h2DbConnectionTest()
+
+[33mcommit 1876f5d3b430d24c5f7876d873906cfa1fbc12e8[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m
+Author: byeungoo <dksekfldks65@naver.com>
+Date:   Mon Apr 18 20:57:23 2022 +0900
+
+    pull request test 삭제
+
+[33mcommit 01003a38170613d1d658b1b38bef10973f459b55[m
+Merge: e73c803 6b465ab
+Author: byungoohoon <102582519+byungoohoon@users.noreply.github.com>
+Date:   Mon Apr 18 20:51:28 2022 +0900
+
+    Merge pull request #5 from byungoohoon/develop
+    
+    feature : pull request test
+
+[33mcommit 6b465ab6b2a404bb021a38fe6c8cf3a011c61255[m
+Author: byeungoo <dksekfldks65@naver.com>
+Date:   Mon Apr 18 20:48:36 2022 +0900
+
+    feature : pull request test
+
+[33mcommit e73c8031347009139a2624fe7058fc0bcd701433[m[33m ([m[1;31morigin/week1-start[m[33m, [m[1;31morigin/week1[m[33m)[m
+Author: byeungoo <dksekfldks65@naver.com>
+Date:   Sun Apr 17 12:59:30 2022 +0900
+
+    pull request test 삭제
+
+[33mcommit 25c4b84bacf2f805df37c60c2772f0b07ec921de[m
+Merge: 0cf2155 1ffcfe8
+Author: byeungoo <dksekfldks65@naver.com>
+Date:   Sun Apr 17 12:57:48 2022 +0900
+
+    Merge branch 'main' of https://github.com/estsoft-externship/backend-track
+
+[33mcommit 0cf2155517f69c75a4cb4d0a0810c86a275912bf[m
+Author: byeungoo <dksekfldks65@naver.com>
+Date:   Sun Apr 17 12:56:51 2022 +0900
+
+    클래스 변수명 오류 수정
+
+[33mcommit 1ffcfe89edaeedda22317f120002f2f82f7cef24[m
+Merge: 9b6b8c2 951d4dd
+Author: byungoohoon <102582519+byungoohoon@users.noreply.github.com>
+Date:   Fri Apr 15 18:03:42 2022 +0900
+
+    Merge pull request #4 from byungoohoon/develop
+    
+    pull request test
+
+[33mcommit 951d4dd7f18fe83e5cbcb68fee09578fe2101877[m
+Author: byeungoo <dksekfldks65@naver.com>
+Date:   Fri Apr 15 18:00:53 2022 +0900
+
+    pull request test
+
+[33mcommit 9b6b8c2da8a3d8eaebbc665a1a55457136fb6c51[m
+Author: byeungoo <dksekfldks65@naver.com>
+Date:   Sat Apr 9 22:40:27 2022 +0900
+
+    config 패키지 추가
+
+[33mcommit a73643b7139858451f0c3a37609eff11d7e6f804[m
+Author: byeonguhun <dksekfldks65@naver.com>
+Date:   Thu Mar 31 01:06:19 2022 +0900
+
+    readme 작성
+
+[33mcommit 52430e6295e1a9de0d7c10df911522f2cc689d21[m
+Author: byeonguhun <dksekfldks65@naver.com>
+Date:   Thu Mar 31 00:47:52 2022 +0900
+
+    week1 readme 작
+
+[33mcommit 4d0c2b35e8f88792576e1b629c2f404ae1613c54[m
+Author: byeonguhun <dksekfldks65@naver.com>
+Date:   Tue Mar 29 18:15:46 2022 +0900
+
+    week1-start
+
+[33mcommit 7a80c9715acd7c13f89c3a408d9815d831f2585a[m
+Author: externship_master <89307148+externship-master@users.noreply.github.com>
+Date:   Tue Mar 22 14:37:03 2022 +0900
+
+    Initial commit

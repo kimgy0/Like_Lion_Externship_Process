@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragment/header :: common_header"/>    <!-- fragmentation-->
+
+<body>
+
+    <div th:replace="fragment/layout_nav_top :: common_layout_nav_top"/>   <!-- fragmentation -->
+
+    <div class="content">
+        <div class="container center_div w-50 mt-4">
+
+            <form action="/register" role="form" th:action th:object="${memberRegisterDto}" method="post">
+
+                <div class="form-group mb-3">
+                    <label for="name">이름</label>
+                    <input type="text" class="form-control" th:field="*{name}" th:errorclass="field-error" placeholder="이름을 입력해주세요" id="name">
+                    <div th:errors="*{name}" class="field-error" ></div>
+                    <!-- <div class="field-error" th:if="${errors?.containsKey('email')}" th:text="${errors['email']}"> </div> -->
+                </div>
+
+                <div class="form-group mb-3">
+                    <label for="email">이메일주소</label>
+                    <input type="email" class="form-control" th:field="*{email}" th:errorclass="field-error" placeholder="이메일을 입력해주세요" id="email">
+                    <div th:errors="*{email}" class="field-error" ></div>
+                    <!-- <div class="field-error" th:if="${errors?.containsKey('email')}" th:text="${errors['email']}"> </div> -->
+                </div>
+
+                <div class="form-group mb-3">
+                    <label for="password">비밀번호</label>
+                    <input type="password" class="form-control" th:field="*{password}" th:errorclass="field-error" placeholder="비밀번호 입력" id="password">
+                    <div th:errors="*{password}" class="field-error" ></div>
+                    <!-- <div class="field-error" th:if="${errors?.containsKey('password')}" th:text="${errors['password']}"> </div> -->
+                </div>
+
+                <div class="form-group mb-3">
+                    <label for="password2">비밀번호 확인</label>
+                    <input type="password" class="form-control" th:field="*{password2}" placeholder="비밀번호 재입력" id="password2">
+                </div>
+
+                <div th:if="${#fields.hasGlobalErrors()}" class="text-center">
+                    <p th:each="err : ${#fields.globalErrors()}" th:text="${err}" class="field-error"></p>
+                </div>
+
+                <div class="mb-3 text-center">
+                    <button type="submit" class="btn btn-primary" style="">회원 가입</button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+    <footer th:replace="fragment/footer ::common_footer"/>
+
+    <!-- jQuery, JS, Popper.js, and  -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+</body>
+</html>
