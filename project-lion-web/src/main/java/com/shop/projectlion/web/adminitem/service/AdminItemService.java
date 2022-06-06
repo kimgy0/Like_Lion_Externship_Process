@@ -3,7 +3,7 @@ package com.shop.projectlion.web.adminitem.service;
 import com.shop.projectlion.domain.delivery.entity.Delivery;
 import com.shop.projectlion.domain.delivery.service.DeliveryService;
 import com.shop.projectlion.domain.image.entity.ItemImage;
-import com.shop.projectlion.domain.image.servie.ItemImageService;
+import com.shop.projectlion.domain.image.service.ItemImageService;
 import com.shop.projectlion.domain.image.validator.ItemImageValidator;
 import com.shop.projectlion.domain.item.entitiy.Item;
 import com.shop.projectlion.domain.item.service.ItemService;

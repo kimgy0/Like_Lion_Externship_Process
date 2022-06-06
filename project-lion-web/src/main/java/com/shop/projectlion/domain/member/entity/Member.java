@@ -1,6 +1,6 @@
 package com.shop.projectlion.domain.member.entity;
 
-import com.shop.projectlion.api.login.dto.KakaoUserInfo;
+import com.shop.projectlion.api.account.dto.KakaoUserInfo;
 import com.shop.projectlion.domain.delivery.entity.Delivery;
 import com.shop.projectlion.domain.item.entitiy.Item;
 import com.shop.projectlion.domain.jwt.dto.TokenDto;
@@ -57,12 +57,15 @@ public class Member extends CommonSubEntity {
 
     private LocalDateTime accessTokenExpiredTime;
 
+    @Builder.Default
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private List<Item> items = new ArrayList<>();
 
+    @Builder.Default
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<Delivery> deliveries = new ArrayList<>();
 
+    @Builder.Default
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
     private List<Order> orders = new ArrayList<>();
 

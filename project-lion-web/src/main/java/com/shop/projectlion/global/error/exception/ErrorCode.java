@@ -8,7 +8,8 @@ public enum ErrorCode {
     // 인증
     ALREADY_REGISTERED_MEMBER(400, "이미 가입된 회원 입니다."),
     MISMATCHED_PASSWORD(401, "패스워드가 일치하지 않습니다."),
-    LOGIN_ERROR(401, "아이디 또는 비밀번호를 확인해주세요"),
+    LOGIN_ERROR(401, "아이디 또는 비밀번호를 확인해주세요."),
+    INVALID_AUTHORIZATION(403, "관리자 권한이 없습니다."),
 
     INVALID_MEMBER_TYPE(400, "잘못된 회원 타입 입니다.(memberType : KAKAO)"),
     NOT_EXISTS_AUTHORIZATION(401, "Authorization Header가 빈값입니다."),

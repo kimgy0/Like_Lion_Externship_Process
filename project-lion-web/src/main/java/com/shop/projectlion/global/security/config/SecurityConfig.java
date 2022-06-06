@@ -53,7 +53,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/","/images/**", "/register", "/login", "/login*","/login/kakao","/auth/kakao/**").permitAll()
+                .antMatchers("/","/images/**", "/register", "/login", "/login*","/login/kakao","/auth/kakao/**"
+                        ,"/swagger-ui/**", "/swagger-resources/**", "/swagger-ui.html", "/v3/api-docs", "/webjars/**").permitAll()
 
                 .anyRequest().authenticated()
 

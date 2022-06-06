@@ -27,7 +27,7 @@ import static java.util.stream.Collectors.toList;
 @Slf4j
 public class ItemDtlService {
 
-    private final com.shop.projectlion.domain.image.servie.ItemImageService itemImageService;
+    private final com.shop.projectlion.domain.image.service.ItemImageService itemImageService;
     private final ItemService itemService;
     private final MemberService memberService;
     private final OrdersService orderService;

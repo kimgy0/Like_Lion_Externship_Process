@@ -18,7 +18,7 @@ public interface ItemImageRepository extends JpaRepository<ItemImage, Long> {
     @Query(value = "select im from ItemImage im join fetch im.item i where i.id=:itemId")
     List<ItemImage> findItemImageEntityByItemId(@Param("itemId") Long id);
 
-    @Query(value = "select im from ItemImage im join fetch im.item i join fetch i.delivery where i.id = :itemId")
+    @Query(value = "select im from ItemImage im join fetch im.item i join fetch i.delivery join fetch i.member where i.id = :itemId")
     @QueryHints(value = @QueryHint(name = "org.hibernate.readOnly", value = "true"))
     List<ItemImage> findItemAndDelivery(@Param("itemId") Long itemId);
 }

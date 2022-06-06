@@ -18,9 +18,6 @@ public interface ItemRepository extends JpaRepository<Item, Long> , ItemReposito
             "on i.id = :itemId")
     Optional<UpdateItemDto> findAllById(@Param("itemId") Long id);
 
-    @Query("select i from Item i join fetch Delivery d on i.id=:itemId")
-    Optional<Item> findJoinDeliveryById(@Param("itemId") Long id);
-
-    @Query("select i from Item i join fetch i.delivery d where i.id = :itemId")
+    @Query("select i from Item i join fetch i.delivery d join fetch i.member m where i.id = :itemId")
     Optional<Item> findItemAndDeliveryEntityById(@Param("itemId") Long itemId);
 }

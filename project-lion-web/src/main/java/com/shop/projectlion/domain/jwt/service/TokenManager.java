@@ -151,12 +151,16 @@ public class TokenManager {
         }
     }
 
-    public boolean isTokenValid(String refreshToken) {
-        Date expiration = getTokenClaims(refreshToken).getExpiration();
-        if(validateToken(refreshToken) && !isTokenExpired(expiration)){
+    public boolean isTokenValid(String token) {
+        Date expiration = getTokenClaims(token).getExpiration();
+        if(validateToken(token) && !isTokenExpired(expiration)){
             return true;
         }else{
-            throw new BusinessException(ErrorCode.REFRESH_TOKEN_EXPIRED);
+            if(getTokenClaims(token).getSubject().equals(TokenType.REFRESH.name())){
+                throw new BusinessException(ErrorCode.REFRESH_TOKEN_EXPIRED);
+            }else{
+                throw new BusinessException(ErrorCode.ACCESS_TOKEN_EXPIRED);
+            }
         }
     }
 }

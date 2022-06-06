@@ -1,17 +1,29 @@
 package com.shop.projectlion.global.config;
 
+import com.shop.projectlion.domain.jwt.service.TokenManager;
+import com.shop.projectlion.domain.member.service.MemberService;
+import com.shop.projectlion.api.interceptor.AuthenticationTokenInterceptor;
+import com.shop.projectlion.api.interceptor.AuthorizationTokenInterceptor;
+import com.shop.projectlion.web.kakaotoken.validator.TokenValidator;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
+@RequiredArgsConstructor
 public class WebMvcConfig implements WebMvcConfigurer {
 
     @Value("${file.upload.path}")
     private String uploadPath;
+
+    private final TokenManager tokenManager;
+    private final TokenValidator tokenValidator;
+    private final MemberService memberService;
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
@@ -38,4 +50,15 @@ public class WebMvcConfig implements WebMvcConfigurer {
          **/
     }
 
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(new AuthenticationTokenInterceptor(tokenManager, tokenValidator, memberService))
+                .order(1)
+                .addPathPatterns("/api/**")
+                .excludePathPatterns("/api/oauth/login","/api/health", "/api/oauth/login", "/api/logout", "/api/token");
+
+        registry.addInterceptor(new AuthorizationTokenInterceptor(tokenManager))
+                .order(2)
+                .addPathPatterns("/api/admin/**");
+    }
 }

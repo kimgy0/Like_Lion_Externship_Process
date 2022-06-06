@@ -24,4 +24,8 @@ public class DeliveryService {
     public Delivery findDeliveryJoinMember(Long id){
         return deliveryRepository.findDeliveryJoinMemberById(id).orElseThrow(() -> new IllegalArgumentException(ErrorCode.NOT_FOUND_DELIVERY.getMessage()));
     }
+
+    public Delivery findDeliveryById(Long deliveryId) {
+        return deliveryRepository.findById(deliveryId).orElseThrow(() -> new IllegalArgumentException(ErrorCode.NOT_FOUND_DELIVERY.getMessage()));
+    }
 }

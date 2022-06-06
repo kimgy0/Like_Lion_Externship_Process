@@ -3,6 +3,7 @@ package com.shop.projectlion.domain.item.entitiy;
 import com.shop.projectlion.domain.delivery.entity.Delivery;
 import com.shop.projectlion.domain.image.entity.ItemImage;
 import com.shop.projectlion.domain.item.constant.ItemSellStatus;
+import com.shop.projectlion.domain.item.dto.ItemDto;
 import com.shop.projectlion.domain.member.entity.Member;
 import com.shop.projectlion.domain.sub.CommonSubEntity;
 import com.shop.projectlion.global.error.exception.BusinessException;
@@ -44,6 +45,7 @@ public class Item extends CommonSubEntity {
     @Enumerated(EnumType.STRING)
     private ItemSellStatus sellStatus;
 
+    @Builder.Default
     @OneToMany(mappedBy = "item", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ItemImage> itemImages = new ArrayList<>();
 
@@ -72,7 +74,7 @@ public class Item extends CommonSubEntity {
         this.stock -= cancelStock;
     }
 
-    public void updateItem(UpdateItemDto updateItemDto, Delivery delivery) {
+    public void updateItem(ItemDto updateItemDto, Delivery delivery) {
         this.detail = updateItemDto.getItemDetail();
         this.name = updateItemDto.getItemName();
         this.price = updateItemDto.getPrice();
